@@ -1,4 +1,33 @@
 # add project
-add_executable(${LIGHT_YEARS_GAME_TARGET_NAME}
+add_executable(
+	${LIGHT_YEARS_GAME_TARGET_NAME}
 	${CMAKE_CURRENT_SOURCE_DIR}/src/main.cpp
 )
+
+# link libraries
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-graphics)
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-window)
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-system)
+target_link_libraries(${LIGHT_YEARS_GAME_TARGET_NAME} PUBLIC sfml-audio)
+
+# CopyLibToTarget is the name of the function
+# the other two are params
+function(CopyLibToTarget LIB_NAME TARGET_NAME)
+	# post build copy shared libraries to build target
+	# debug build target: G:\LightYearsGame\build\LightYears\Debug
+	add_custom_command(
+		TARGET ${TARGET_NAME}
+		POST_BUILD
+		COMMAND
+		${CMAKE_COMMAND} -E copy_if_different
+		# what we copy:
+		$<TARGET_FILE:${LIB_NAME}>
+		# what we copy into
+		$<TARGET_FILE_DIR:${TARGET_NAME}>
+ )
+endfunction()
+
+CopyLibToTarget(sfml-graphics ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-window ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-system ${LIGHT_YEARS_GAME_TARGET_NAME})
+CopyLibToTarget(sfml-audio ${LIGHT_YEARS_GAME_TARGET_NAME})

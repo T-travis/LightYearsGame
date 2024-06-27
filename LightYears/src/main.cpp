@@ -1,6 +1,9 @@
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 int main()
 {
-	std::cout << "hello world" << std::endl;
+ sf::RenderWindow rederWindow{ sf::VideoMode(100, 100), "Window"};
+ 
+ return 0;
 }
