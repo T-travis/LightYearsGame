@@ -23,10 +23,12 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(${SFML_LIB_NAME})
 
 # create custom variable: LIGHT_YEARS_GAME_TARGET_NAME
+set(LIGHT_YEARS_ENGINE_TARGET_NAME LightYearsEngine)
 set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
 
-# import CmakeLists.txt from G:\LightYearsGame\LightYears
-add_subdirectory(LightYears)
+# import CmakeLists.txt from G:\LightYearsGameProject\LightYears
+add_subdirectory(LightYearsEngine)
+add_subdirectory(LightYearsGame)
 
 # run "cmake -S .. -B ." from build dir
 # or "cmake -S . -B ./build"
