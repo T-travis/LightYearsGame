@@ -12,7 +12,7 @@ namespace ly
 // Using TEMPLATES for Generics
 
 // UNIQUE POINTER -> you don't need to delete/deallocate pointer
-// you can't copy but you can move/transfer to another pointer
+// you can't copy/transfered but you can move to another pointer
 template<typename T>
 using unique = std::unique_ptr<T>;
 
@@ -40,7 +40,7 @@ using Map = std::map<keyType, valueType, pr>;
 // Dictionary object - Unordered Map - Faster lookup
 // hasing is used for order which isn't known thus unordered
 template<typename keyType, typename valueType, typename hasher  = std::hash<keyType>>
-using Dictionary = std::map<keyType, valueType, hasher>;
+using Dictionary = std::unordered_map<keyType, valueType, hasher>;
 
 //** END COMMON DATA TYPES **//
 
