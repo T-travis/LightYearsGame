@@ -1,13 +1,17 @@
 #include "framework/Application.h"
-#include <iostream>
+#include "framework/Core.h"
+#include "framework/World.h"
 
 namespace ly
 {
-  Application::Application()
-    : mWindow{ sf::VideoMode(1400, 1000), "Light Years" },
+  Application::Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, sf::Uint32 style)
+    : mWindow{ sf::VideoMode(windowWidth, windowHeight), "Light Years", style },
     mTargetFramerate{ 60.f }, // 60 FPS target 
-    mTickClock{}
-  {}
+    mTickClock{},
+    currentWorld{ nullptr }
+  {
+
+  }
 
   void Application::Run()
   {
@@ -27,8 +31,8 @@ namespace ly
       }
 
       // Output the actual framerate just to show difference between targetDeltaTime
-      //float frameDelteTime = mTickClock.restart().asSeconds();
-      //std::cout << "REAL ticking at framerate: " << 1.f / frameDelteTime << std::endl;
+      //float frameDeltaTime = mTickClock.restart().asSeconds();
+      //LOG("REAL ticking at framerate: %f", 1.f / frameDeltaTime);
 
       accumulatedTime += mTickClock.restart().asSeconds(); // restart & return ellapsed time
       while (accumulatedTime > targetDeltaTime)
@@ -43,8 +47,13 @@ namespace ly
 
   void Application::TickInternal(float deltaTime)
   {
-    //std::cout << "ticking at framerate: " << 1.f / deltaTime << std::endl;
     Tick( deltaTime);
+
+    // World Tick after Application Tick
+    if (currentWorld)
+    {
+      currentWorld->TickInternal(deltaTime);
+    }
   }
 
   void Application::Tick(float deltaTime)
@@ -61,10 +70,9 @@ namespace ly
 
   void Application::Render()
   {
-    sf::RectangleShape rect{ sf::Vector2f{100,100} };
-    rect.setFillColor(sf::Color::Green);
-    rect.setOrigin(50, 50);
-    rect.setPosition(mWindow.getSize().x / 2.f, mWindow.getSize().y / 2.f);
-    mWindow.draw(rect);
+    if (currentWorld)
+    {
+      currentWorld->Render(mWindow);
+    }
   }
 }
