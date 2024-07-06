@@ -9,6 +9,7 @@ namespace ly
   public:
     shared<sf::Texture> LoadTexture(const std::string& path);
     static AssetManager& Get();
+    void CleanCycle();
 
   // derived classes can use things in protected
   protected: 

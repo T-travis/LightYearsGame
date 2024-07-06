@@ -37,6 +37,23 @@ namespace ly
     return *assetManager;
   }
 
+  void AssetManager::CleanCycle()
+  {
+    for (auto iter = mLoadedTextureMap.begin(); iter != mLoadedTextureMap.end();)
+    {
+      // check if asset isn't shared by any resource and thus isn't needed
+      if (iter->second.unique())
+      {
+        LOG("cleaning assets 111111111111111111111111111111111111111...", iter->first.c_str());
+        iter = mLoadedTextureMap.erase(iter);
+      }
+      else
+      {
+        ++iter;
+      }
+    }
+  }
+
   AssetManager::AssetManager()
   {
 

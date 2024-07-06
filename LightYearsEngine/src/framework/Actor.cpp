@@ -24,7 +24,7 @@ namespace ly
 
   void Actor::BeginPlay()
   {
-    LOG("ACTOR begin play...");
+    //LOG("ACTOR begin play...");
   }
 
   void Actor::TickInternal(float deltaTime)
@@ -37,7 +37,7 @@ namespace ly
 
   void Actor::Tick(float deltaTime)
   {
-    LOG("ACTOR tick...");
+    //LOG("ACTOR tick...");
   }
 
   void Actor::SetTexture(const std::string& texturePath)
