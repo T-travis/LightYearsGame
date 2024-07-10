@@ -22,6 +22,9 @@ add_library(
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/Object.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/Object.cpp
 
+	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/MathUtility.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/MathUtility.cpp
+
 )
 
 # tell cmake where to look for header files

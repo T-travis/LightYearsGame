@@ -1,10 +1,12 @@
 #pragma once
 #include <framework/Application.h>
 #include <framework/Core.h>
+#include "spaceship/SpaceShip.h"
 
 namespace ly
 {
   class Actor;
+  class PlayerSpaceShip;
   class GameApplication : public Application
   {
   public:
@@ -13,7 +15,6 @@ namespace ly
     virtual void Tick(float deltaTime) override;
 
   private:
-    float counter;
-    weak<Actor> actorToDestroy;
+    weak<PlayerSpaceShip> testPlayerSpaceShip;
   };
 }

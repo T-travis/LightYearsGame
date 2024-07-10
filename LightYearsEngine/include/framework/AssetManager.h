@@ -10,6 +10,7 @@ namespace ly
     shared<sf::Texture> LoadTexture(const std::string& path);
     static AssetManager& Get();
     void CleanCycle();
+    void SetAssetRootDirectory(const std::string& directory);
 
   // derived classes can use things in protected
   protected: 
@@ -23,6 +24,7 @@ namespace ly
     // and using a Unique Pointer that can't be copied/transfered.
     static unique<AssetManager> assetManager;
 
+    std::string mRootDirectory;
     Dictionary<std::string, shared<sf::Texture>> mLoadedTextureMap;
   };
 }
