@@ -1,5 +1,6 @@
 #include "player/PlayerSpaceShip.h"
 #include "SFML/System.hpp"
+#include "framework/MathUtility.h"
 
 namespace ly
 {
@@ -29,7 +30,8 @@ namespace ly
     {
       mMoveInput.y = 1.f;
     }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
     {
       mMoveInput.x = -1.f;
     }
@@ -37,10 +39,18 @@ namespace ly
     {
       mMoveInput.x = 1.f;
     }
+
+    NormalizeInput();
   }
+
   void PlayerSpaceShip::ConsumeInput(float deltaTime)
   {
     SetVelocity(mMoveInput * mSpeed);
     mMoveInput.x = mMoveInput.y = 0.f; // set back to not moving
+  }
+
+  void PlayerSpaceShip::NormalizeInput()
+  {
+    Normalize(mMoveInput);
   }
 }

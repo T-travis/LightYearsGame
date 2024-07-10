@@ -17,6 +17,8 @@ namespace ly
 
     void HandleInput();
     void ConsumeInput(float deltaTime);
+    // Clamp input to produce consistent speed
+    void NormalizeInput();
 
   };
 }
