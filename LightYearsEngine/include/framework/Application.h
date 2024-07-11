@@ -12,7 +12,8 @@ namespace ly
   public:
     Application(unsigned int windowWidth, unsigned int windowHeight, const std::string& title, sf::Uint32 style);
     void Run();
-    
+    sf::Vector2u GetWindowSize() const;
+ 
     // allows varios WorldTypes
     template<typename WorldType>
     weak<WorldType> LoadWorld()

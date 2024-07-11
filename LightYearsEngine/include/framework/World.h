@@ -14,6 +14,7 @@ namespace ly
     void TickInternal(float deltaTime);
     void Render(sf::RenderWindow& window);
     virtual ~World();
+    sf::Vector2u GetWindowSize() const;
 
     template<typename ActorType>
     weak<ActorType> SpawnActor()

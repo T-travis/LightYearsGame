@@ -17,8 +17,10 @@ namespace ly
 
     void HandleInput();
     void ConsumeInput(float deltaTime);
-    // Clamp input to produce consistent speed
+    // Keep input at consistent speed.
     void NormalizeInput();
+    // Keep input within screen.
+    void ClampInputOnEdge();
 
   };
 }

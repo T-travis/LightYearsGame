@@ -25,6 +25,7 @@ namespace ly
     float GetActorRotation() const;
     sf::Vector2f GetActorForwardDirection() const;
     sf::Vector2f GetActorRightDirection() const;
+    sf::Vector2u GetWindowSize() const;
 
   private:
     World* mOwningWorld;
