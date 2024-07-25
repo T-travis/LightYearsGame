@@ -25,6 +25,9 @@ add_library(
 	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/MathUtility.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/MathUtility.cpp
 
+	${CMAKE_CURRENT_SOURCE_DIR}/include/framework/PhysicsSystem.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/framework/PhysicsSystem.cpp
+
 )
 
 # tell cmake where to look for header files

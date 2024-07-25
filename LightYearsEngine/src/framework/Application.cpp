@@ -2,6 +2,7 @@
 #include "framework/Core.h"
 #include "framework/World.h"
 #include "framework/AssetManager.h"
+#include "framework/PhysicsSystem.h"
 
 namespace ly
 {
@@ -62,6 +63,9 @@ namespace ly
     {
       currentWorld->TickInternal(deltaTime);
     }
+
+    // Update physics system
+    PhysicsSystem::Get().Step(deltaTime);
 
     // clean up unused assets
     if (mCleanCycleClock.getElapsedTime().asSeconds() >= mCleanCycleInterval)
