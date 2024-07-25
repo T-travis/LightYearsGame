@@ -32,11 +32,37 @@ target_include_directories(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 
+include(FetchContent)
+
+set(SFML_LIB_NAME SFML)
+# fetch SFML 
+FetchContent_Declare(
+	${SFML_LIB_NAME}
+	GIT_REPOSITORY https://github.com/SFML/SFML
+	GIT_TAG        2.6.1  #sfml version
+	GIT_SHALLOW    FALSE  #no shallow copy of repo
+)
+# make available to project
+FetchContent_MakeAvailable(${SFML_LIB_NAME})
+
 # link libraries
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-graphics)
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-window)
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-system)
 target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC sfml-audio)
+
+set(BOX2D_LIB_NAME Box2D)
+# fetach Box2D
+FetchContent_Declare(
+	${BOX2D_LIB_NAME}
+	GIT_REPOSITORY https://github.com/erincatto/box2d
+	GIT_TAG        v2.4.1
+	GIT_SHALLOW    FALSE
+)
+# make available to project
+FetchContent_MakeAvailable(${BOX2D_LIB_NAME})
+# link library
+target_link_libraries(${LIGHT_YEARS_ENGINE_TARGET_NAME} PUBLIC box2d)
 
 # CopyLibToTarget is the name of the function
 # the other two are params
@@ -59,3 +85,5 @@ CopyLibToTarget(sfml-graphics ${LIGHT_YEARS_ENGINE_TARGET_NAME})
 CopyLibToTarget(sfml-window ${LIGHT_YEARS_ENGINE_TARGET_NAME})
 CopyLibToTarget(sfml-system ${LIGHT_YEARS_ENGINE_TARGET_NAME})
 CopyLibToTarget(sfml-audio ${LIGHT_YEARS_ENGINE_TARGET_NAME})
+
+CopyLibToTarget(box2d ${LIGHT_YEARS_ENGINE_TARGET_NAME})

@@ -10,18 +10,6 @@ set(CMAKE_CXX_STANDARD          14)  # c++ version
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS        OFF) # help cross compatibility. some systems may not support extension others do
 
-include(FetchContent)
-set(SFML_LIB_NAME SFML)
-# fetch SFML 
-FetchContent_Declare(
-	${SFML_LIB_NAME}
-	GIT_REPOSITORY https://github.com/SFML/SFML
-	GIT_TAG        2.6.1  #sfml version
-	GIT_SHALLOW    FALSE  #no shallow copy of repo
-)
-# make available to project
-FetchContent_MakeAvailable(${SFML_LIB_NAME})
-
 # create custom variable: LIGHT_YEARS_GAME_TARGET_NAME
 set(LIGHT_YEARS_ENGINE_TARGET_NAME LightYearsEngine)
 set(LIGHT_YEARS_GAME_TARGET_NAME LightYearsGame)
