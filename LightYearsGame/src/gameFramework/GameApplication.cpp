@@ -20,11 +20,9 @@ namespace ly
   {
     AssetManager::Get().SetAssetRootDirectory(GetResourceDir());
     weak<World> newWorld = LoadWorld<World>();
-    newWorld.lock()->SpawnActor<Actor>();
-
     testPlayerSpaceShip = newWorld.lock()->SpawnActor<PlayerSpaceShip>();
     testPlayerSpaceShip.lock()->SetActorLocation(sf::Vector2f(490.f, 490.f));
-    testPlayerSpaceShip.lock()->SetActorRotation(0.f);
+    testPlayerSpaceShip.lock()->SetActorRotation(-90.f);
 
   }
 

@@ -9,6 +9,15 @@ add_executable(
 
 	${CMAKE_CURRENT_SOURCE_DIR}/include/player/PlayerSpaceShip.h
 	${CMAKE_CURRENT_SOURCE_DIR}/src/player/PlayerSpaceShip.cpp
+
+	${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Shooter.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Shooter.cpp
+
+	${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/BulletShooter.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/BulletShooter.cpp
+
+	${CMAKE_CURRENT_SOURCE_DIR}/include/weapon/Bullet.h
+	${CMAKE_CURRENT_SOURCE_DIR}/src/weapon/Bullet.cpp
 )
 
 # tell cmake where to look for header files

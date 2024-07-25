@@ -3,7 +3,7 @@
 namespace  ly
 {
   // used to convert degrees to radians 
-  const float PI = 3.1415926535; 
+  const float PI = 3.1415926535;
   const float PI_RADIANS = 180.f; // PI Radians = 180 degrees
 
   // Deep explanation from Pikuma: https://www.youtube.com/watch?v=tEUpWgy-Tuo&t=129s

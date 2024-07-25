@@ -18,5 +18,9 @@ namespace ly
 
   sf::Vector2f SpaceShip::GetVelocity() const { return mVelocity; }
 
+  void SpaceShip::Shoot()
+  {
+  }
+
 
 }

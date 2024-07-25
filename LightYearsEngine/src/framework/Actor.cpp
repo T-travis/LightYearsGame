@@ -51,7 +51,7 @@ namespace ly
 
     int textureWidth = mTexture->getSize().x;
     int textureHeight = mTexture->getSize().y;
-    mSprite.setTextureRect(sf::IntRect(sf::Vector2i{}, sf::Vector2i{ textureWidth, textureHeight }));
+    mSprite.setTextureRect(sf::IntRect{ sf::Vector2i{}, sf::Vector2i{ textureWidth, textureHeight } });
     CenterPivot();
   }
 
@@ -105,6 +105,38 @@ namespace ly
   sf::Vector2u Actor::GetWindowSize() const
   {
     return mOwningWorld->GetWindowSize();
+  }
+
+  sf::FloatRect Actor::GetActorGlobalBounds() const
+  {
+    return mSprite.getGlobalBounds();
+  }
+
+  bool Actor::IsActorOutOfWindowBounds() const
+  {
+    float windowWidth = GetWorld()->GetWindowSize().x;
+    float windowHeight = GetWorld()->GetWindowSize().y;
+    float actorWidth = GetActorGlobalBounds().width;
+    float actorHeight = GetActorGlobalBounds().height;
+    sf::Vector2f actorPosition = GetActorLocation();
+
+    if (actorPosition.x < -actorWidth)
+    {
+      return true;
+    }
+    if (actorPosition.x > windowWidth + actorWidth)
+    {
+      return true;
+    }
+    if (actorPosition.y < -actorHeight)
+    {
+      return true;
+    }
+    if (actorPosition.y > windowHeight + actorHeight)
+    {
+      return true;
+    }
+    return false;
   }
 
   void Actor::CenterPivot()

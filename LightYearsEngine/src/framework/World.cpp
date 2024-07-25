@@ -33,21 +33,10 @@ namespace ly
     }
     mPendingActors.clear(); // clear temp actors
     // Every World tick, we Tick each Actor
-    // using iterator instead of loop above
-    // iterators are good for when removing from a list you're iterating over
     for (auto iter = mActors.begin(); iter != mActors.end();)
     {
-      if (iter->get()->IsPendingDestroy())
-      {
-        // NOTE: is a bigger game it would be better to have a timer that when runs
-        // out clears Actors and other objects ready to be destroyed.
-        iter = mActors.erase(iter); // remove from list to destroy Actor
-      }
-      else
-      {
-        iter->get()->TickInternal(deltaTime);
-        ++iter;
-      }
+      iter->get()->TickInternal(deltaTime);
+      ++iter;
     }
     
     Tick(deltaTime);
@@ -69,6 +58,23 @@ namespace ly
   sf::Vector2u World::GetWindowSize() const
   {
     return mOwningApp->GetWindowSize();
+  }
+
+  void World::CleanCycle()
+  {
+    for (auto iter = mActors.begin(); iter != mActors.end();)
+    {
+      if (iter->get()->IsPendingDestroy())
+      {
+        // NOTE: is a bigger game it would be better to have a timer that when runs
+        // out clears Actors and other objects ready to be destroyed.
+        iter = mActors.erase(iter); // remove from list to destroy Actor
+      }
+      else
+      {
+        ++iter;
+      }
+    }
   }
 
   void World::BeginPlay()
