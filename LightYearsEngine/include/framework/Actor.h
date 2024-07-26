@@ -3,6 +3,7 @@
 #include "framework/Core.h"
 #include "framework/Object.h"
 
+class b2Body;
 namespace ly
 {
   class World; // World is the owner of the Actor
@@ -29,15 +30,24 @@ namespace ly
     sf::FloatRect GetActorGlobalBounds() const;
     World* GetWorld() const { return mOwningWorld; }
     bool IsActorOutOfWindowBounds() const;
+    void SetEnablePhysics(bool enable);
+    virtual void OnActorBeginOverlap(Actor* other);
+    virtual void OnActorEndOverlap(Actor* other);
+    virtual void Destroy() override;
 
   private:
     World* mOwningWorld;
     bool mHasBeganPlay;
+    b2Body* mPhysicsBody;
+    bool mPhysicsEnabled;
     
     sf::Sprite mSprite;
     shared<sf::Texture> mTexture;
 
     void CenterPivot();
+    void InitializePhysics();
+    void UnInitializePhysics();
+    void UpdatePhysicsBodyTransform();
 
   };
 }

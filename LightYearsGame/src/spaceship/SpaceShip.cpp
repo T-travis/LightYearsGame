@@ -22,5 +22,11 @@ namespace ly
   {
   }
 
+  void SpaceShip::BeginPlay()
+  {
+    Actor::BeginPlay();
+    SetEnablePhysics(true);
+  }
+
 
 }

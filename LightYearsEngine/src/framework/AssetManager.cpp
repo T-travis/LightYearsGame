@@ -44,7 +44,7 @@ namespace ly
       // check if asset isn't shared by any resource and thus isn't needed
       if (iter->second.unique())
       {
-        LOG("cleaning assets 111111111111111111111111111111111111111...", iter->first.c_str());
+        LOG("cleaning assets...", iter->first.c_str());
         iter = mLoadedTextureMap.erase(iter);
       }
       else

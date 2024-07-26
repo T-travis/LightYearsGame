@@ -24,10 +24,18 @@ namespace ly
     testPlayerSpaceShip.lock()->SetActorLocation(sf::Vector2f(490.f, 490.f));
     testPlayerSpaceShip.lock()->SetActorRotation(-90.f);
 
+    // test contact
+    weak<SpaceShip> testSpaceShip = newWorld.lock()->SpawnActor<SpaceShip>();
+    testSpaceShip.lock()->SetTexture("SpaceShooterRedux/PNG/playerShip1_blue.png");
+    testSpaceShip.lock()->SetActorLocation(sf::Vector2f{ 100.f, 50.f });
+    counter = 0.f;
   }
 
   void GameApplication::Tick(float deltaTime)
   {
-
+    counter += deltaTime;
+    if (counter > 10.f && !testPlayerSpaceShip.expired()) {
+      testPlayerSpaceShip.lock()->Destroy();
+    }
   }
 }

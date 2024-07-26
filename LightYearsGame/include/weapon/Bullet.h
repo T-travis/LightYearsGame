@@ -13,6 +13,7 @@ namespace ly
     void SetDamage(float damage);
     float GetDamage() const;
     virtual void Tick(float deltaTime) override;
+    virtual void BeginPlay() override;
 
   private:
     Actor* mOwner;

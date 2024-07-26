@@ -4,6 +4,7 @@
 #include <vector>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 
 namespace ly
 {
@@ -31,6 +32,10 @@ using weak = std::weak_ptr<T>;
 // Container object
 template<typename T>
 using List = std::vector<T>;
+
+// Set container object
+template<typename T>
+using Set = std::unordered_set<T>;
 
 // Map object - Ordered Map - Use when you want ordering
 // less orders the keyType (1 would be before 2)

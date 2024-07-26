@@ -3,6 +3,8 @@
 #include "framework/AssetManager.h"
 #include "framework/MathUtility.h"
 #include "framework/World.h"
+#include "framework/PhysicsSystem.h"
+#include <box2d/b2_body.h>
 
 namespace ly
 {
@@ -10,7 +12,9 @@ namespace ly
     : mOwningWorld{ owningWorld }, 
       mHasBeganPlay{ false },
       mSprite{},
-      mTexture{}
+      mTexture{},
+      mPhysicsBody{nullptr},
+      mPhysicsEnabled{false}
   {
     SetTexture(texturePath);
   }
@@ -65,11 +69,13 @@ namespace ly
   void Actor::SetActorLocation(const sf::Vector2f& newLocation)
   {
     mSprite.setPosition(newLocation);
+    UpdatePhysicsBodyTransform();
   }
 
   void Actor::SetActorRotation(float newRotation)
   {
     mSprite.setRotation(newRotation);
+    UpdatePhysicsBodyTransform();
   }
 
   void Actor::AddActorLocationOffset(const sf::Vector2f& offsetAmount)
@@ -139,10 +145,70 @@ namespace ly
     return false;
   }
 
+  void Actor::SetEnablePhysics(bool enable)
+  {
+    mPhysicsEnabled = enable;
+    if (mPhysicsEnabled)
+    {
+      InitializePhysics();
+    }
+    else
+    {
+      UnInitializePhysics();
+    }
+  }
+
+  void Actor::OnActorBeginOverlap(Actor* other)
+  {
+    LOG("overlapped...");
+  }
+
+  void Actor::OnActorEndOverlap(Actor* other)
+  {
+    LOG("overlapp finised...");
+  }
+
+  void Actor::Destroy()
+  {
+    UnInitializePhysics();
+    Object::Destroy();
+  }
+
   void Actor::CenterPivot()
   {
     sf::FloatRect bound = mSprite.getGlobalBounds();
     mSprite.setOrigin(bound.width / 2.f, bound.height / 2.f);
+  }
+
+  void Actor::InitializePhysics()
+  {
+    if (!mPhysicsBody)
+    {
+      mPhysicsBody = PhysicsSystem::Get().AddListener(this);
+    }
+  }
+
+  void Actor::UnInitializePhysics()
+  {
+    if (mPhysicsBody)
+    {
+      PhysicsSystem::Get().RemoveListener(mPhysicsBody);
+      mPhysicsBody = nullptr;
+    }
+  }
+
+  void Actor::UpdatePhysicsBodyTransform()
+  {
+    if (mPhysicsBody)
+    {
+      float physicsScale = PhysicsSystem::Get().GetPhysicsScale();
+      b2Vec2 position{
+        GetActorLocation().x * physicsScale,
+        GetActorLocation().y * physicsScale
+      };
+      float rotation = DegreesToRadians(GetActorRotation());
+      mPhysicsBody->SetTransform(position, rotation);
+    }
   }
 
   Actor::~Actor()
